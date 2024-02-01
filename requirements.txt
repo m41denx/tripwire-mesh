@@ -1,0 +1,3 @@
+Flask~=2.2.2
+requests
+wg-meshconf@git+https://github.com/k4yt3x/wg-meshconf.git
