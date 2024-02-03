@@ -6,4 +6,4 @@ COPY . /app
 WORKDIR /app
 RUN apk update && apk add git
 RUN pip3 install -r /app/requirements.txt
-CMD ["python3", "/app/server.py"]
+CMD ["python3", "server.py"]

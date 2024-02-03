@@ -5,10 +5,8 @@ import subprocess
 import sys
 import time
 
-TOKEN = os.environ.get("token")
-SERVER = os.environ.get("server")
-CONF_HASH = ""
-
+TOKEN = os.environ.get("TOKEN")
+SERVER = os.environ.get("SERVER")
 
 def gethash(data=None):
     if data is None:
@@ -39,7 +37,7 @@ def update_peer(address, port="1080"):
         "port": port,
         "name": get_hostname()
     }
-    r = requests.post(f"{SERVER}/update", json=conf)
+    r = requests.post(f"{SERVER}/update", json=conf, headers={"Authorization": TOKEN})
     print(r.text)
     return r.status_code == 200
 
@@ -52,13 +50,13 @@ def new_peer(address, port="1080"):
         "port": port,
         "name": get_hostname()
     }
-    r = requests.post(f"{SERVER}/new", json=conf)
+    r = requests.post(f"{SERVER}/new", json=conf, headers={"Authorization": TOKEN})
     print(r.text)
     return r.status_code == 200
 
 
 def fetch_config():
-    r = requests.get(f"{SERVER}/getconf/{get_hostname()}")
+    r = requests.get(f"{SERVER}/getconf/{get_hostname()}", headers={"Authorization": TOKEN})
     if r.status_code!=200:
         return ""
     return r.text

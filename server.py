@@ -57,6 +57,7 @@ def deleteconf(node):
         return make_response('Unauthorized', 401)
     dbm = wg_meshconf.DatabaseManager(pathlib.Path("database.csv"))
     dbm.delpeer(Name=node)
+    dbm.genconfig(None, pathlib.Path("output"))
     return 'OK'
 
 
@@ -67,6 +68,8 @@ def client():
 
 
 if __name__ == '__main__':
+    dbm = wg_meshconf.DatabaseManager(pathlib.Path("database.csv"))
+    dbm.genconfig(None, pathlib.Path("output"))
     app.run(host='0.0.0.0', port=8080)
     conf = {
         "private_key": "...",
